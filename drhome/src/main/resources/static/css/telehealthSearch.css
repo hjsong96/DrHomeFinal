@@ -1,0 +1,429 @@
+@charset "UTF-8";
+
+@import
+	url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css")
+	;
+
+@import
+	url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css')
+	;
+
+/* 기본 틀 */
+* {
+	font-family: "Pretendard Variable";
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: white;
+}
+
+header {
+	position: fixed;
+	height: 8vh;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	align-items: center;
+	z-index: 1000;
+	background-color: white;
+	padding-inline-end: 22px;
+	padding-inline-start: 24px;
+}
+
+.xi-angle-left, .xi-angle-right {
+	color: #757575;
+}
+
+.headerTitle {
+	font-family: "NanumSquare" !important;
+	font-size: 18px;
+	text-align: center;
+	font-weight: 900;
+	margin: 20px 50px;
+}
+
+main {
+	padding-top: 9vh;
+}
+
+.blank {
+	width: 21px;
+}
+
+.margin-right {
+	margin-right: 4px;
+}
+
+.margin-left {
+	margin-left: 4px;
+}
+
+/* 공통 */
+.search {
+	width: 90%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	height: 40px;
+	padding: 0 2%;
+	align-items: center;
+}
+
+.searchInput {
+	display: flex;
+	width: 90%;
+	height: 90%;
+	justify-content: space-between;
+	align-items: center;
+	margin-right: 3%;
+	border: 0.5px solid #F5F5F5;
+	border-radius: 8px;
+}
+
+#keyword {
+	height: 100%;
+	width: 85%;
+	padding: 7px;
+	margin-right: 5px;
+	border-radius: 8px;
+	border: none;
+	background-color: white;
+	font-size: 14px;
+	font-weight: 400;
+	border: none;
+}
+
+.deleteSearch {
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	width: 15%;
+	height: 100%;
+	font-size: 17px;
+	color: #9d9d9d;
+	align-items: center;
+}
+
+.searchButton {
+	border: none;
+	background-color: white;
+	height: 100%;
+}
+
+.searchButton img {
+	max-height: 60%;
+	width: auto;
+}
+
+/* search */
+.searchRecent {
+	margin: 10px 0;
+	padding: 18px 0;
+}
+
+.titleSection {
+	width: 90%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+}
+
+.searchTitle {
+	font-size: 17px;
+	font-weight: 700;
+}
+
+.searchDelete {
+	font-size: 13px;
+	color: #9d9d9d;
+}
+
+.searchRecentItems {
+	display: flex;
+	width: 90%;
+	margin: 0 auto;
+	padding: 15px 0;
+	height: auto;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.recentItemBox {
+	margin: 5px;
+	border-radius: 20px;
+	border: 0.5px solid #c1c0c0;
+	padding: 7px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	height: 33px;
+}
+
+.recentItem {
+	background-color: white;
+	border: none;
+	font-size: 14px;
+	margin: 0 13px 0 5px;
+}
+
+.xi-close-min {
+	font-size: 17px;
+	color: #8a8989;
+	width: 18px;
+	height: 20px;
+	line-height: 20px;
+}
+
+.searchRecommend {
+	width: 90%;
+	margin: 10px auto;
+	padding: 18px 0;
+}
+
+.searchRecommendItems {
+	display: flex;
+	padding: 15px 0;
+	height: auto;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.recommendItem, .recommendRandomItem {
+	margin: 5px;
+	border-radius: 20px;
+	border: 0.5px solid #c1c0c0;
+	padding: 7px;
+	background-color: white;
+	height: 33px;
+}
+
+/* menu bar */
+.selectedOption {
+	height: 6vh;
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	color: #d5d2d2;
+	background-color: white;
+	margin: 7px 0;
+}
+
+.optionDepartment, .optionSymptom {
+	border-bottom: 0.5px solid #d5d2d2;
+	width: 50%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.selectOption {
+	color: black !important;
+	font-weight: 700 !important;
+	border-bottom: 2px solid black !important;
+}
+
+/* 진료과 */
+.favoriteTitle {
+	width: 90%;
+	margin: 5px auto;
+	height: 44px;
+	padding: 17px 0;
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.favoriteKeyword {
+	width: 90%;
+	margin: 0px auto;
+}
+
+.randomKeyword {
+	background-color: rgba(0, 201, 255, 0.15);
+	border: 1px solid rgba(0, 201, 255, 0.30);
+	padding: 5px 10px;
+	border-radius: 25px;
+	margin: 5px;
+	font-size: 15px;
+}
+
+.departmentBox {
+	width: 90%;
+	height: 70px;
+	margin: 0px auto;
+	display: flex;
+	align-items: center;
+}
+
+.departmentText {
+	width: 85%;
+	display: flex;
+	flex-direction: column;
+}
+
+.departmentKeyword {
+	height: 44px;
+	line-height: 44px;
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.departmentExample {
+	margin-left: 7px;
+	font-size: 15px;
+	color: #5c5c5c;
+}
+
+.departmentImg {
+	padding-top: 15px;
+}
+
+.departmentImg img {
+	width: 50px;
+}
+
+.grayLine {
+	height: 15px;
+	border-bottom: 1px solid #f1f0f0;
+}
+
+/* 증상 */
+.seletedSymptomBox {
+	display: none;
+	height: 70px;
+	display: flex;
+}
+
+.symptomBox {
+	border-bottom: 1px solid #f1f0f0;
+}
+
+.symptomText {
+	width: 90%;
+	margin: 5px auto;
+	display: flex;
+	height: 45px;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.symptomImg {
+	width: 40px;
+	height: 100%;
+	padding: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: 15px;
+}
+
+.symptomImg img {
+	width: 100%;
+}
+
+.symptomKeyword {
+	height: 44px;
+	line-height: 44px;
+	font-size: 18px;
+	font-weight: 500;
+	width: 270px;
+}
+
+.symptomExample {
+	width: 90%;
+	margin: 0 auto;
+	padding: 5px 0 10px 0;
+	display: none;
+}
+
+.symptomKind {
+	border-radius: 15px;
+	background-color: white;
+	margin: 3px;
+	padding: 6px;
+	font-size: 13px;
+	border: 1px solid #d6d4d4;
+	color: #5c5c5c;
+}
+
+/* 서브 메뉴 고정 */
+.fixed {
+	position: fixed;
+	height: 8vh;
+	width: 100%;
+	box-sizing: border-box;
+	top: 8vh;
+	background-color: white;
+}
+
+/* footer */
+footer {
+	bottom: 0;
+	position: fixed;
+	height: 9vh;
+	width: 100%;
+	z-index: 1000;
+	background-color: white;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	padding: 0 10px;
+	color: gray;
+}
+
+.footerIcon {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.footerIcon img {
+	width: 20px;
+}
+
+.footerIcon p {
+	margin-top: 5px;
+	font-size: 9px;
+	text-align: center;
+	font-weight: 500;
+	color: gray;
+}
+
+.now p {
+	color: black
+}
+
+.footerMain {
+	display: flex;
+	width: 47px;
+	height: 47px;
+	background: linear-gradient(180deg, rgba(131, 247, 146, 0.5) 0%,
+		rgba(0, 201, 255, 0.5) 99.95%, rgba(82, 209, 187, 0.5) 99.96%,
+		rgba(61, 193, 204, 0.5) 99.97%, rgba(49, 183, 214, 0.5) 99.98%,
+		rgba(48, 183, 215, 0.5) 99.99%, rgba(0, 145, 255, 0.5) 100%);
+	box-shadow: 0px 12px 32px #979797;
+	border-radius: 100px;
+	padding: 0;
+	margin-bottom: 5px;
+	align-items: center;
+	justify-content: center;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+.footer20 {
+	width: 20%
+}
+
+.footerMap {
+	display: flex;
+	justify-content: center;
+}

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drhome.main.MainDAO">
+	<select id="findQuizByRandom">
+		SELECT qquestion, qanswer, ptno FROM quiz WHERE qno
+		=#{randomNumber}
+	</select>
+
+	<select id="findNewQna">
+		SELECT btitle, bcontent, bdate, bno, dpno, m.mname
+		FROM board b JOIN member m on b.mno=m.mno WHERE btype='0' ORDER BY
+		bdate
+		DESC LIMIT 15;
+	</select>
+
+	<update id="raisePointByQuiz">
+		UPDATE member m
+		SET m.mpoint = m.mpoint + #{ptno}
+		WHERE mno =#{mno}
+	</update>
+	
+	<insert id="raisePointByQuizToPoint">
+		INSERT INTO point
+		(pttoggle, ptpointpayment, ptpoint, mno )
+		VALUES('1', #{ptno}, (SELECT mpoint FROM member WHERE mno=#{mno})+ #{ptno}, #{mno} )
+	</insert>
+
+	<select id="getNotification">
+		SELECT nno, mno, DATE_FORMAT(ndate, '%Y-%m-%d 
+		%H:%i')AS ndate,
+		nchattingNoti, nqnaboardNoti, nfreeboardNoti, nappointmentNoti,
+		ntelehealthNoti,nread
+		FROM notification
+		WHERE mno=#{mno}
+		ORDER BY nno
+		DESC;
+	</select>
+
+	<select id="countNotification">
+		SELECT COUNT(*) AS countNoti FROM notification WHERE
+		nread = '0' AND mno=#{mno}
+	</select>
+	
+	<update id="updateNotificationNum">
+		UPDATE notification n
+		SET n.nread='1'
+		WHERE nno=#{nno}
+	</update>
+	
+	<select id="userInfo" parameterType="Object" resultType="Map">
+		SELECT mnickname, mbirth, mimg, mid, mname, dimg
+		FROM member m
+		LEFT JOIN doctor d ON m.dno = d.dno
+		WHERE mno = #{mno}
+	</select>
+
+</mapper>

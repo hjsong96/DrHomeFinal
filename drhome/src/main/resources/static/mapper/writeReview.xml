@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drhome.writeReview.WriteReviewDAO">
+	<select id="findDoctorByHno" resultType="Map">
+		SELECT dno, dname,dimg FROM doctor WHERE hno=#{hno}
+	</select>
+	<select id="findHospitalByHno" resultType="Map">
+		SELECT hname FROM hospital WHERE hno=#{hno}
+	</select>
+	
+	<insert id="writeReview">
+		INSERT INTO review (mno, rrate, rcontent, rkeyword, dno, hno)
+		VALUES(#{mno}, #{rate}, #{content}, #{keyword}, #{dno}, #{hno})
+	
+	</insert>
+</mapper>

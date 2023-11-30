@@ -1,0 +1,74 @@
+@charset "UTF-8";
+
+@import
+	url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css")
+	;
+
+@import
+	url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css')
+	;
+
+#dh-modal-alert, #dh-modal-alert2, #dh-modal-alert3, #dh-modal-alert4, #dh-modal-alert5, #dh-modal-alert6, #dh-modal-alert7 {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 1s ease-in-out;
+	background: rgba(0, 0, 0, 0.2);
+	justify-content: flex-end;
+	flex-direction: column;
+	z-index: 1499;
+}
+
+#dh-modal-alert.active, #dh-modal-alert2.active, #dh-modal-alert3.active, #dh-modal-alert4.active, #dh-modal-alert5.active, #dh-modal-alert6.active, #dh-modal-alert7.active {
+	opacity: 1;
+	visibility: visible;
+}
+
+.dh-modal {
+	padding: 20px;
+	width: 90%;
+	border-radius: 15px;
+	background-color: #F4F4F4;
+	height: 90px;
+	display: flex;
+	align-items: center;
+	margin: 18px auto;
+	z-index: 1500;
+}
+
+.dh-modal-title {
+	font-size: 18px;
+	font-weight: 700;
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 7px;
+	align-items: center;
+}
+
+.dh-modal-content {
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	flex-direction: column;
+}
+
+.dh-alert-img {
+	width: 25px;
+	height: 25px;
+	margin-right: 10px;
+}
+
+.dh-modal-text {
+	color: #313131;
+	font-size: 15px;
+	font-weight: 600;
+}
+
+.dh-modal-blank {
+	height: 9vh;
+}

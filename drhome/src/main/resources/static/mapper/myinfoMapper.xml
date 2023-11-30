@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drhome.myinfo.MyInfoDAO">
+	
+	<select id="myInfo" parameterType="Integer" resultType="Map">
+	   SELECT mname, mnickname, mid, CAST(AES_DECRYPT(UNHEX(mpw), 'drhome') AS CHAR) AS mpw, memail, mhomeaddr, mhomeaddr2, mcompanyaddr, mcompanyaddr2, mbirth, mphonenumber 
+		FROM member WHERE mno=#{mno};
+	</select>
+	
+	<update id="changePW" parameterType="Map">
+		UPDATE member SET mpw=HEX(AES_ENCRYPT(#{mpw}, 'drhome')) WHERE mno=#{mno}; 
+	</update>
+	
+	<update id="changeHomeAddr" parameterType="Map">
+		UPDATE member SET mhomeaddr=#{mhomeaddr}, mhomeaddr2=#{mhomeaddr2} WHERE mno=#{mno}; 
+	</update>
+	
+	<update id="changeCompanyAddr" parameterType="Map">
+		UPDATE member SET mcompanyaddr=#{mcompanyaddr}, mcompanyaddr2=#{mcompanyaddr2} WHERE mno=#{mno}; 
+	</update>
+	
+	<update id="changePhoneNumber" parameterType="Map">
+		UPDATE member SET mphonenumber=#{mphonenumber} WHERE mno=#{mno};
+	</update>
+	
+	<update id="changeAllMyInfo" parameterType="Map">
+		UPDATE member SET mpw=HEX(AES_ENCRYPT(#{mpw}, 'drhome')),
+		mhomeaddr=#{mhomeaddr}, mhomeaddr2=#{mhomeaddr2},
+		mcompanyaddr=#{mcompanyaddr}, mcompanyaddr2=#{mcompanyaddr2},
+		mphonenumber=#{mphonenumber}
+		WHERE mno=#{mno};
+	</update>
+	
+	<select id="myWriting" parameterType="Integer" resultType="Map">
+		SELECT b.bno, b.btype, b.btitle, 
+		DATE_FORMAT(b.bdate, '%Y-%m-%d') as bdate,
+		m.mnickname FROM board b JOIN member m ON b.mno=m.mno WHERE m.mno=#{mno} ORDER BY bdate DESC;
+	</select>
+	
+	<select id="myComment" parameterType="Integer" resultType="Map">
+		SELECT c.cno, c.ccontent,
+		DATE_FORMAT(c.cdate, '%Y-%m-%d') as cdate, 
+		m.mnickname, b.btype
+		FROM comment c 
+		JOIN member m ON c.mno=m.mno 
+		JOIN board b ON c.bno= b.bno
+		WHERE m.mno=#{mno} ORDER BY cdate DESC;
+	</select>
+	
+	<select id="healthRecord" parameterType="Integer" resultType="Map">
+		SELECT * FROM healthRecord WHERE mno=#{mno};
+	</select>
+	
+	<update id="changeHealthRecord" parameterType="Map">
+		UPDATE healthRecord SET hrheight=#{hrheight}, hrweight=#{hrweight}, hrsystolicpressure=#{hrsystolicpressure}, hrdiastolicpressure=#{hrdiastolicpressure}, hrissue=#{hrissue} WHERE mno=#{mno}; 
+	</update>
+	
+	<insert id="registerHealthRecord" parameterType="Map">
+	    INSERT INTO healthRecord (mno) VALUES (#{mno});
+	</insert>
+	
+	<select id="selectHealthRecord" parameterType="Integer" resultType="Integer">
+		SELECT COUNT(*) FROM healthRecord WHERE mno=#{mno};
+	</select>
+	
+	<select id="callDibs" parameterType="Integer" resultType="Map">
+		SELECT b.bno, b.btype, b.btitle, 
+		DATE_FORMAT(b.bdate, '%Y-%m-%d') as bdate,
+	    m.mnickname FROM board b 
+	    JOIN member m ON b.mno = m.mno
+	    WHERE FIND_IN_SET(#{mno}, bcalldibs) > 0 ORDER BY bdate DESC;
+	</select>
+	
+	<select id="appointmentHistory" parameterType="Integer" resultType="Map">
+	    SELECT  
+	    DATE_FORMAT(a.adate, '%Y-%m') as adate,
+	    a.asymptomInfo, h.hname, d.dname, dp.dpkind
+	    FROM appointment a
+	    JOIN hospital h ON a.hno = h.hno
+	    JOIN doctor d ON a.dno = d.dno
+	    JOIN department dp ON a.dpno = dp.dpno
+	    WHERE a.mno = #{mno}
+	    ORDER BY a.adate DESC;
+	</select>
+	
+	<select id="telehealthHistory" parameterType="Integer" resultType="Map">
+	    SELECT 
+	    DATE_FORMAT(t.tdate, '%Y-%m') as tdate,
+	    t.tdiagnosisdetail,
+	    h.hname, d.dname, dp.dpkind
+	    FROM telehealth t
+	    JOIN hospital h ON t.hno = h.hno
+	    JOIN doctor d ON t.dno = d.dno
+	    JOIN department dp ON t.dpno = dp.dpno
+	    WHERE t.mno = #{mno}
+	    ORDER BY t.tdate DESC;
+	</select>
+	
+</mapper>

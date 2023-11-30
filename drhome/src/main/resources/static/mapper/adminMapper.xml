@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drhome.admin.AdminDAO">
+
+	<select id="memberList" resultType="Map">
+		SELECT *
+		FROM member
+	</select>
+
+	<select id="adminLogin" parameterType="Map" resultType="Map">
+		<![CDATA[
+			SELECT
+			count(*) as count, mid, mname, mgrade
+			FROM member
+			WHERE mid=#{id} AND AES_DECRYPT(UNHEX(mpw), 'drhome')=#{pw} AND mgrade > 4
+		]]>
+	</select>
+
+	<select id="adminInfo" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM member
+		WHERE mno=#{mno}
+	</select>
+
+	<select id="report" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM report
+		WHERE DATE_FORMAT(rpdate, '%Y-%m-%d')
+	</select>
+
+	<select id="manageBoardList" resultType="Map">
+		SELECT *
+		FROM board ORDER
+		BY bno ASC
+	</select>
+
+	<update id="gradeChange" parameterType="Map">
+		UPDATE member SET
+		mgrade=#{mgrade} WHERE mno=#{mno}
+	</update>
+
+	<update id="resultChange" parameterType="Map">
+		UPDATE report 
+		SET rpresult=#{rpresult} WHERE rpno=#{rpno}
+	</update>
+
+	<update id="memberRcount" parameterType="Map">
+		<![CDATA[
+		UPDATE member
+		SET mboardcount = mboardcount + 1
+		WHERE mno=#{mno} AND mboardcount < 6
+		]]>
+	</update>
+
+	<select id="getMno" parameterType="Map" resultType="Integer">
+		SELECT mno
+		FROM report
+		WHERE rpno = #{rpno}
+	</select>
+ 
+	<select id="reportList" parameterType="Map" resultType="Map">
+		SELECT * FROM report
+		WHERE bno=#{bno}
+	</select>
+
+	<select id="aApprove" parameterType="Map" resultType="Map">
+		SELECT * FROM appointment
+	</select>
+
+	<update id="appointmentChange" parameterType="Map">
+		UPDATE appointment 
+		SET aresult=#{aresult} WHERE ano=#{ano}
+	</update>
+	
+	<select id="hospitalOpen" parameterType="Map" resultType="Map">
+		SELECT * FROM registerhospital
+		ORDER BY rhopendate DESC LIMIT 10
+	</select>
+
+	<insert id="insertRegisterHos" parameterType="Map">
+		INSERT INTO registerhospital (rhname, rhopendate, rhaddr, rhtelnumber, rhimg, rhinfo, rhopentime, rhclosetime, rhnightday, rhnightendtime, rhbreaktime, rhbreakendtime, rhholiday, rhholidayendtime, rhparking)
+		VALUES (#{rhname}, #{rhopendate}, #{rhaddr}, #{rhtelnumber}, #{rhimg}, #{rhinfo}, #{rhopentime}, #{rhclosetime}, #{rhnightday}, #{rhnightendtime}, #{rhbreaktime}, #{rhbreakendtime}, #{rhholiday}, #{rhholidayendtime}, #{rhparking})
+	 	<selectKey resultType="Integer" keyProperty="rhno" order="AFTER">
+        	SELECT LAST_INSERT_ID()
+    	</selectKey>   
+	</insert>
+	
+	<insert id="insertHospital" parameterType="Map">
+		INSERT INTO hospital (hname, hopendate, haddr, htelnumber, himg, hinfo, hopentime, hclosetime, hnightday, hnightendtime, hbreaktime, hbreakendtime, hholiday, hholidayendtime, hparking)
+		VALUES (#{rhname}, #{rhopendate}, #{rhaddr}, #{rhtelnumber}, #{rhimg}, #{rhinfo}, #{rhopentime}, #{rhclosetime}, #{rhnightday}, #{rhnightendtime}, #{rhbreaktime}, #{rhbreakendtime}, #{rhholiday}, #{rhholidayendtime}, #{rhparking})
+	</insert>
+	
+	<insert id="insertDoctor" parameterType="Map">
+		INSERT INTO doctor (dname, dimg, dinfo, dgender, dcareer, dspecialist, dpno, hno, dtelehealth)
+		VALUES (#{rdname}, #{rdimg}, #{rdinfo}, #{rdgender}, #{rdcareer}, #{rdspecialist}, #{dpno}, #{rhno}, #{rdtelehealth})
+	</insert>
+	
+	<!-- <select id="hospitalList" parameterType="Integer" resultType="Map">
+		SELECT *
+		FROM registerhospital
+		WHERE rhno=#{rhno}
+	</select> -->
+	
+	<insert id="insertRegisterDoc" parameterType="Map">
+		INSERT INTO registerdoctor (rdname, rdimg, rdinfo, rdgender, rdcareer, rdspecialist, dpno, rhno, rdtelehealth)
+		VALUES (#{rdname}, #{rdimg}, #{rdinfo}, #{rdgender}, #{rdcareer}, #{rdspecialist}, #{dpno}, #{rhno}, #{rdtelehealth})
+	</insert>
+
+	<insert id="insertRegisterDocom" parameterType="Map">
+		INSERT INTO registerdoctor (rdname, rdimg, rdinfo, rdgender, rdcareer, rdspecialist, dpno, rhno, rdtelehealth)
+		VALUES (#{rdname}, #{rdimg}, #{rdinfo}, #{rdgender}, #{rdcareer}, #{rdspecialist}, #{dpno}, #{rhno}, #{rdtelehealth})
+	</insert>
+
+	
+	<update id="resultCh" parameterType="Map">
+		UPDATE registerhospital 
+		SET rhresult=#{rhresult} WHERE rhno=#{rhno}
+	</update>
+	
+	<select id="detail" parameterType="Integer" resultType="Map">
+		SELECT rh.rhno, rh.rhname, rh.rhopendate, rh.rhaddr, rh.rhtelnumber, rh.rhimg, rh.rhinfo, DATE_FORMAT(rh.rhopentime, '%H:%i') AS rhopentime, DATE_FORMAT(rh.rhclosetime, '%H:%i') AS rhclosetime, rh.rhnightday, DATE_FORMAT(rh.rhnightendtime, '%H:%i') AS rhnightendtime, DATE_FORMAT(rh.rhbreaktime, '%H:%i') AS rhbreaktime, DATE_FORMAT(rh.rhbreakendtime, '%H:%i') AS rhbreakendtime, rh.rhholiday, DATE_FORMAT(rh.rhholidayendtime, '%H:%i') AS rhholidayendtime, rh.rhparking  
+		FROM registerdoctor rd
+		JOIN registerhospital rh
+		ON rd.rhno = rh.rhno
+		WHERE rh.rhno=#{rhno}
+	</select>
+	
+	<select id="detailOne" parameterType="Integer" resultType="Map">
+		SELECT *
+		FROM registerhospital
+		WHERE rhno=#{rhno}
+	</select>
+	
+	<select id="detailTwo" parameterType="Integer" resultType="Map">
+		SELECT *
+		FROM registerdoctor
+		WHERE rdno=#{rdno}
+	</select>
+	
+	<select id="detailDoctor" parameterType="Integer" resultType="Map">
+		SELECT *
+		FROM registerdoctor
+		WHERE rdno=#{rdno}
+	</select>
+	
+	<select id="search" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM registerdoctor
+		<where>
+			<choose>
+				<when test="searchN == 'rdname'">rdname LIKE CONCAT('%', #{searchV}, '%')</when>
+			</choose>
+		</where>
+	</select>
+	
+	<delete id="deleteHospital" parameterType="Integer" >
+		DELETE FROM registerhospital WHERE rhno = #{rhno}
+	</delete>
+	
+	<delete id="deleteDoctor" parameterType="Integer" >
+		DELETE FROM registerDoctor WHERE rdno = #{rdno}
+	</delete>
+	
+	<select id="finalHospital" resultType="Map">
+		SELECT * FROM hospital
+		ORDER BY hopendate DESC
+	</select>
+	
+<!-- 	<select id="newHospital" resultType="Map">
+		SELECT * FROM hospitalList_view
+		
+		<where>
+		<if test="hno != 0">
+    		hno = #{hno}
+  		</if>
+		</where>
+		
+		ORDER BY hno DESC
+	</select> -->
+	
+	<select id="newDoctor" resultType="Map">
+		SELECT * FROM registerdoctor
+		
+		<where>
+		<if test="rdno != 0">
+    		rdno = #{rdno}
+  		</if>
+		</where>
+		
+		ORDER BY rdno DESC
+	</select>
+		
+	
+	<select id="realDetail" parameterType="Integer" resultType="Map">
+		SELECT * 
+		FROM registerhospital
+		WHERE rhno=#{rhno}
+	</select>
+	
+	<select id="viewDoctor" parameterType="Integer" resultType="Map">
+		SELECT *
+		FROM registerdoctor
+		WHERE rdno=#{rdno}
+	</select>
+	
+	<select id="searchHos" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM registerhospital
+		<where>
+			<choose>
+				<when test="searchN == 'rhname'">rhname LIKE CONCAT('%', #{searchV}, '%')</when>
+				<when test="searchN == 'rhaddr'">rhaddr LIKE CONCAT('%', #{searchV}, '%')</when>
+			</choose>
+		</where>
+		ORDER BY rhopendate DESC
+	</select>
+	
+	<delete id="deleteHos" parameterType="Integer" >
+		DELETE FROM registerhospital WHERE rhno = #{rhno}
+	</delete>
+	
+	<select id="hospitalDetail">
+		SELECT rhno, rhname, rhopendate, rhaddr, rhtelnumber, rhimg, rhinfo, DATE_FORMAT(rhopentime, '%H:%i') AS rhopentime, DATE_FORMAT(rhclosetime, '%H:%i') AS rhclosetime, rhnightday, DATE_FORMAT(rhnightendtime, '%H:%i') AS rhnightendtime, DATE_FORMAT(rhbreaktime, '%H:%i') AS rhbreaktime, DATE_FORMAT(rhbreakendtime, '%H:%i') AS rhbreakendtime, rhholiday, DATE_FORMAT(rhholidayendtime, '%H:%i') AS rhholidayendtime, rhparking  FROM registerhospital WHERE rhno=#{rhno};
+	</select>
+	
+	<select id="doctorDetail">
+		SELECT * 
+		FROM registerdoctor rd 
+		JOIN department d 
+		ON rd.dpno = d.dpno
+		JOIN registerhospital rh 
+		ON rd.rhno = rh.rhno 
+		WHERE rd.rhno=#{rhno};
+	</select>
+	
+	
+</mapper>

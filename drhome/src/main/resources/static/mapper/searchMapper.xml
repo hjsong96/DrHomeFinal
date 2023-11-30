@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drhome.search.SearchDAO">
+
+	<select id="departmentKeyword" resultType="Map">
+		SELECT dpkind, dpsymptom, dpkeyword
+		FROM department
+	</select>
+	
+	<select id="hospitalList" resultType="Map">
+		SELECT h.*
+		FROM hospitalList_view h
+	</select>
+	
+	<select id="kindHospitalList" parameterType="Map" resultType="Map">
+		SELECT h.*
+		FROM hospitalList_view h
+		WHERE #{kindKeyword} = h.dpkind
+			<if test="optionKeyword != null">
+				<if test="optionKeyword.contains('여의사')">
+					AND h.dgender = 1
+				</if>
+				<if test="optionKeyword.contains('전문의')">
+					AND h.dspecialist = 1
+				</if>
+				<if test="optionKeyword.contains('주차장')">
+					AND h.hparking = 1
+				</if>
+				<if test="optionKeyword.contains('휴일진료')">
+					AND h.hholiday = 1
+				</if>
+				<if test="optionKeyword.contains('야간진료')">
+					AND h.hnightday IS NOT NULL
+				</if>
+			</if>
+	</select>
+	
+	<select id="symptomHospitalList" parameterType="Map" resultType="Map">
+		SELECT h.*
+		FROM hospitalList_view h
+		WHERE FIND_IN_SET(#{symptomKeyword}, h.dpkeyword)
+			<if test="optionKeyword != null">
+				<if test="optionKeyword.contains('여의사')">
+					AND h.dgender = 1
+				</if>
+				<if test="optionKeyword.contains('전문의')">
+					AND h.dspecialist = 1
+				</if>
+				<if test="optionKeyword.contains('주차장')">
+					AND h.hparking = 1
+				</if>
+				<if test="optionKeyword.contains('휴일진료')">
+					AND h.hholiday = 1
+				</if>
+				<if test="optionKeyword.contains('야간진료')">
+					AND h.hnightday IS NOT NULL
+				</if>
+			</if>
+	</select>
+	
+	<select id="otherHospitalList" parameterType="Map" resultType="Map">
+		SELECT h.*
+		FROM hospitalList_view h
+		<where>
+			<if test="optionKeyword != null">
+					<if test="optionKeyword.contains('여의사')">
+						AND h.dgender = 1
+					</if>
+					<if test="optionKeyword.contains('전문의')">
+						AND h.dspecialist = 1
+					</if>
+					<if test="optionKeyword.contains('주차장')">
+						AND h.hparking = 1
+					</if>
+					<if test="optionKeyword.contains('휴일진료')">
+						AND h.hholiday = 1
+					</if>
+					<if test="optionKeyword.contains('야간진료')">
+						AND h.hnightday IS NOT NULL
+					</if>
+				</if>
+		</where>
+	</select>
+	
+	<select id="hospitaNamelList" parameterType="Object" resultType="Map">
+		SELECT h.*
+		FROM hospitalList_view h
+		WHERE h.hname LIKE CONCAT('%', #{keyword}, '%') OR h.dname LIKE CONCAT('%', #{keyword}, '%')
+			<if test="optionKeyword != null">
+				<if test="optionKeyword.contains('여의사')">
+					AND h.dgender = 1
+				</if>
+				<if test="optionKeyword.contains('전문의')">
+					AND h.dspecialist = 1
+				</if>
+				<if test="optionKeyword.contains('주차장')">
+					AND h.hparking = 1
+				</if>
+				<if test="optionKeyword.contains('휴일진료')">
+					AND h.hholiday = 1
+				</if>
+				<if test="optionKeyword.contains('야간진료')">
+					AND h.hnightday IS NOT NULL
+				</if>
+			</if>
+	</select>
+	
+	<update id="hospitalLike" parameterType="Map">
+		UPDATE member
+	    SET mhospitallike = 
+	    	<if test="hospitalDelName == ''">
+	    		CASE
+	    			WHEN mhospitallike IS NULL OR mhospitallike = '' THEN #{hospitalName}
+	    			ELSE CONCAT(mhospitallike,',',#{hospitalName})
+    			END
+	    	</if>
+	    	<if test="hospitalName == ''">
+	    		CASE
+    				WHEN mhospitallike LIKE CONCAT('%', ',', #{hospitalDelName}, '%') THEN REPLACE(mhospitallike, CONCAT(',', #{hospitalDelName}), '')
+    				WHEN mhospitallike LIKE CONCAT('%', #{hospitalDelName},',','%') THEN REPLACE(mhospitallike, CONCAT(#{hospitalDelName}, ','), '')
+    				ELSE REPLACE(mhospitallike, #{hospitalDelName}, '')
+    			END
+	    	</if>
+	    WHERE mno = #{mno}
+	</update>
+	
+	<select id="hospitalLikeList" parameterType="Integer" resultType="String">
+		SELECT mhospitallike
+		FROM member
+		WHERE mno = #{mno}
+	</select>
+
+</mapper>

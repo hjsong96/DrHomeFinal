@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drhome.docadmin.DocAdminDAO">
+
+	<select id="findHospitalImg" resultType="Map">
+		SELECT h.himg
+		FROM doctor d
+		JOIN hospital h ON d.hno = h.hno
+		WHERE d.dno =#{dno};
+	</select>
+	
+	<select id="telehealthHistory" parameterType="Integer" resultType="Map">
+	    SELECT t.*, m.mname, d.dname, dp.dpkind
+	    FROM telehealth t
+	    JOIN member m ON t.mno = m.mno
+	    JOIN doctor d ON t.dno = d.dno
+	    JOIN department dp ON t.dpno = dp.dpno
+	    WHERE t.dno = #{dno}
+	    ORDER BY t.tdate DESC;
+	</select>
+	
+	<select id="searchMname" parameterType="Map" resultType="Map">
+	    <![CDATA[
+	    SELECT t.*, m.mname, d.dname, dp.dpkind
+	    FROM telehealth t
+	    JOIN member m ON t.mno = m.mno
+	    JOIN doctor d ON t.dno = d.dno
+	    JOIN department dp ON t.dpno = dp.dpno
+	    WHERE t.dno = #{dno}
+	    ]]>
+	    <if test="mname != null">
+	        AND m.mname LIKE CONCAT('%', #{mname}, '%')
+	    </if>
+	    <![CDATA[
+	    ORDER BY t.tdate DESC LIMIT 10;
+	    ]]>
+	</select>
+	
+	<select id="getHno" parameterType="Map" resultType="Integer">
+		SELECT hno FROM doctor WHERE dno=#{dno};
+	</select>
+	
+	<select id="dpKind" parameterType="Map" resultType="Map">
+	    SELECT DISTINCT dp.dpkind, dp.dpno
+	    FROM doctor d
+	    JOIN department dp ON d.dpno = dp.dpno
+	    WHERE d.hno=#{hno};
+	</select>
+	
+	<select id="docMainDetail" parameterType="Integer" resultType="Map">
+	    SELECT d.dname, h.hname
+	    FROM doctor d
+	    JOIN hospital h ON d.hno = h.hno
+	    WHERE d.dno=#{dno};
+	</select>
+	
+	<update id="updateRows" parameterType="List">
+	    UPDATE telehealth SET tstatus=2 WHERE tno IN 
+	    <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+	        #{item}
+	    </foreach>
+	</update>
+	
+	<select id="patientDetail" parameterType="Map" resultType="Map">
+	    SELECT m.*, t.*, COALESCE(hr.hrissue, '없음') AS hrissue, h.hno
+	    FROM telehealth t
+	    JOIN member m ON t.mno = m.mno
+	    JOIN hospital h ON t.hno = h.hno
+	    LEFT JOIN healthRecord hr ON t.mno = hr.mno
+	    WHERE t.tno=#{tno};
+	</select>
+	
+	<select id="hospitalCount" parameterType="Map" resultType="Integer">
+	    SELECT COUNT(*) as count
+	    FROM telehealth 
+	    WHERE mno=#{mno} and hno=#{hno};
+	</select>
+	
+	<update id="updateTelehealth" parameterType="Map">
+		UPDATE telehealth SET tdiagnosisdetail=#{tdiagnosisdetail}, tstatus=1 WHERE tno=#{tno};
+	</update>
+	
+	<insert id="updateNotification" parameterType="Map">
+		INSERT INTO notification (ntelehealthNoti, mno)
+		SELECT '1', mno FROM telehealth WHERE tno=#{tno};
+	</insert>
+	
+	<select id="findHospitalByHno" parameterType="Map" resultType="Map">
+	    SELECT TIME_FORMAT(hopentime, '%H:%i') as hopentime,
+      	TIME_FORMAT(hclosetime, '%H:%i') as hclosetime,
+      	TIME_FORMAT(hnightendtime, '%H:%i') as hnightendtime,
+      	TIME_FORMAT(hbreaktime, '%H:%i') as hbreaktime,
+     	TIME_FORMAT(hbreakendtime, '%H:%i') as hbreakendtime,
+      	TIME_FORMAT(hholidayendtime, '%H:%i') as hholidayendtime,
+      	hholiday
+	    FROM hospitalList_view 
+	    WHERE hno=#{hno}
+	    GROUP BY hno;
+	</select>
+	
+</mapper>

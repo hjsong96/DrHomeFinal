@@ -1,0 +1,246 @@
+@charset "UTF-8";
+
+@import
+	url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css")
+	;
+
+@import
+	url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css')
+	;
+
+* {
+	font-family: "Pretendard Variable";
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: white;
+}
+
+header {
+	position: fixed;
+	height: 8vh;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	align-items: center;
+	z-index: 1000;
+	background-color: white;
+	padding-inline-end: 22px;
+	padding-inline-start: 24px;
+}
+
+.xi-angle-left, .xi-angle-right {
+	color: #757575;
+}
+
+.headerTitle {
+	font-family: "NanumSquare" !important;
+	font-size: 18px;
+	text-align: center;
+	font-weight: 900;
+	margin: 20px 50px;
+}
+
+footer {
+    bottom: 0;
+    position: fixed;
+    height: 9vh;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    align-items: center;
+    z-index: 1000;
+    background-color: white;
+}
+
+footer button {
+	display: flex;
+	font-weight: 700;
+	background-color: #00c9ff;
+	color: white;
+	height: 80%;
+	width: 92%;
+	border: none;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+	font-size: 15px;
+	border-radius: 14px;
+}
+
+main{
+	padding-top: 9vh;
+}
+
+.blank {
+	width: 21px;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+}
+
+.subMenu.fixed {
+	position: fixed;
+	height: 7vh;
+	width: 100%;
+	box-sizing: border-box;
+	top: 7vh;
+	background-color: white;
+}
+
+.subMenu {
+	width: 100%;
+	height: 6vh;
+	background-color: white;
+	z-index: 999;
+	box-sizing: border-box;
+}
+
+.subMenu ul {
+	background-color: white;
+	display: flex;
+	list-style-type: none;
+	justify-content: space-around;
+	margin: 0;
+	padding: 0;
+}
+
+.subMenu ul li {
+	width: 25%;
+	height: 5vh;
+	text-align: center;
+	display: flex;
+	font-size: 15px;
+	font-weight: 600;
+	color: #BFBFBF;
+	border-bottom: 1px solid #E0E0E0;
+	justify-content: center;
+	align-items: center;
+	width: 34%
+}
+
+.selectedSubMenu {
+	color: black !important;
+	font-weight: 700 !important;
+	border-bottom: 2px solid black !important;
+}
+
+.title {
+    font-size: 19px;
+    font-weight: 700;
+    width: 90%;
+    margin: 14px 20px 25px 20px;
+}
+
+.patient-area{
+    width: 90%;
+    height: 30%;
+    margin: 8px 20px;
+}
+
+.patient-area span {
+    width: 140px;
+}
+
+.p-title{
+	height: 30px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.p-detail{
+	height: 50px;
+    font-size: 15px;
+    font-weight: normal;
+    margin: 1px 0px;
+}
+
+.graySeperate {
+	height: 15px;
+	background-color: #F5F5F5;
+}
+
+textarea {
+	width: 350px;
+    height: 350px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    padding: 18px;
+    background-color: rgb(233, 233, 233);
+    margin: 0px 20px 20px 20px;
+}
+
+.write{
+	display: inline-block;
+    width: 350px; 
+    height: 350px; 
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    padding: 18px;
+    background-color: rgb(233, 233, 233);
+    margin: 0px 20px 20px 20px;
+    
+}
+
+.diagnosisInfo-area{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 20px 79px 0px;
+}
+
+.bottom{
+	height: 195px;
+    margin: 0px 0px 13px 20px;
+}
+
+.bottom-title{
+    height: 20px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.bottom-detail {
+    margin: 10px 0px 6px 0px;
+    font-size: 13px;
+    height: 16px;
+}
+
+.bottom-detail2{
+    margin: 10px 0px 6px 11px;
+    font-size: 13px;
+    height: 16px;
+}
+
+.center-circle-area{
+    display: flex;
+    position: fixed;
+    bottom: 9vh;
+    right: 19px;
+    justify-content: flex-end;
+    z-index: 2;
+}
+
+.center-circle {
+    background: #00C9FF;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.center-img img{
+	width: 33px;
+    margin: 9px 0px 0px 8px;
+    z-index: 2;
+}
+
+

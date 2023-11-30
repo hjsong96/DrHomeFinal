@@ -1,0 +1,352 @@
+@charset "UTF-8";
+
+@import
+	url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css")
+	;
+
+@import
+	url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css')
+	;
+
+/* 기본 틀 */
+* {
+	font-family: "Pretendard Variable";
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+textarea:focus {
+    outline: none; /* 기본 focus 스타일 제거 */
+}
+body {
+	background-color: white;
+}
+
+header {
+	position: fixed;
+	height: 8vh;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	align-items: center;
+	z-index: 1000;
+	background-color: white;
+	padding-inline-end: 22px;
+	padding-inline-start: 24px;
+}
+
+.xi-angle-left, .xi-angle-right {
+	color: #757575;
+}
+
+.headerTitle {
+	font-family: "NanumSquare" !important;
+	font-size: 18px;
+	text-align: center;
+	font-weight: 900;
+	margin: 20px 50px;
+}
+
+footer {
+	bottom: 0;
+	position: fixed;
+	height: 9vh;
+	margin: 0 auto;
+	z-index: 1000;
+	background-color: white;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+main {
+	padding-top: 9vh;
+}
+
+.blank {
+	width: 21px;
+}
+
+.margin-right {
+	margin-right: 4px;
+}
+
+.margin-left {
+	margin-left: 4px;
+}
+
+/* 병원 정보 */
+.hospitalInfo {
+	width: 90%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	height: 90vh;
+	align-items: center;
+	flex-direction: column;
+	font-size: 30px;
+	text-align: center;
+	animation: slidein 2s;
+	align-items: center;
+}
+
+.hospitalInfo img {
+	width: 200px;
+	height: 200px;
+}
+
+#ask {
+	font-weight: 700;
+	font-size: 30px;
+}
+
+/* 리뷰 */
+.goUp {
+	display: none;
+	width: 90%;
+	margin: 0 auto;
+	display: flex;
+	height: 80px;
+}
+
+.hospitalImg {
+	width: 25%;
+	border-radius: 50px;
+	overflow: hidden;
+	margin: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.hospitalImg img {
+	width: 50px;
+}
+
+.goUp #hospitalName {
+    width: 75%;
+    padding: 10px 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.goUp span {
+	font-size: 16px;
+	margin-right: 5px;
+	font-weight: 600;
+}
+
+.selectStars {
+	font-size: 20px;
+}
+
+.xi-star-o {
+    color: #dbdbdb;
+}
+
+.xi-star {
+	color: #00C9FF;
+}
+
+.grayLine {
+    height: 15px;
+    background-color: #F5F5F5;
+    margin: 10px 0;
+}
+
+/* 의사 고르기 */
+.totalDoctor {
+	display: none;
+	width: 90%;
+	margin: 25px auto;
+}
+
+.title {
+	font-size: 15px;
+	font-weight: 500;
+	height: 25px;
+}
+
+.selectDoctor {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.selectDoctorInfo {
+	display: flex;
+	text-align: center;
+	font-size: 13px;
+	flex-direction: column;
+	align-items: center;
+	margin: 5px;
+	padding: 5px 0;
+}
+
+.imgBox {
+	width: 65px;
+	height: 65px;
+	border-radius: 50px;
+	overflow: hidden;
+	margin: 5px;
+}
+
+.selectDoctor img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.selectedDoc {
+	background-color: #8ed6ff;
+	border-radius: 10px;
+	color: white;
+}
+
+.totalTreatment {
+	display: none;
+}
+
+.questionBox {
+	width: 90%;
+	margin: 25px auto;
+}
+
+.reviewAnswerBox {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.reviewAnswerBox button {
+	width: 100px;
+	height: 40px;
+	margin: 7px;
+	background-color: white;
+	border: 1px solid #F5F5F5;
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 13px;
+	color: #5c5c5c;
+}
+
+.reviewAnswerBox img {
+	width: 17px;
+	margin-right: 5px;
+}
+
+#content {
+	width: 100%;
+	height: 180px;
+	margin: 8px 0;
+	border-radius: 5px;
+	border: 1px solid #e3dcdc;
+	padding: 15px;
+}
+
+.selectedTreatment {
+	background-color: rgba(0, 201, 255, 0.11) !important;
+	border: 1px solid #00C9FF !important;
+	color: black !important;
+}
+
+.totalFeedback {
+	display: none;
+}
+
+.selectedFeedback {
+	background-color: rgba(0, 201, 255, 0.11) !important;
+	border: 1px solid #00C9FF !important;
+	color: black !important;
+}
+
+.reviewContent {
+	display: none;
+}
+
+#finish {
+	display:none;
+	width: 90%;
+	height:70%;
+	border-radius: 7px;
+	color: #787878;
+	background-color: #ebebeb;
+	border: none;
+	font-size: 15px;
+	font-weight: 500;
+}
+
+.submit-btn-css {
+	background-color: #00C9FF !important;
+	color: white !important;
+}
+
+/* 알림 모달 */
+#dh-modal-alert {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 1s ease-in-out;
+	background: rgba(0, 0, 0, 0.2);
+	justify-content: flex-end;
+	flex-direction: column;
+	z-index: 1499;
+	transition: opacity 1s ease-in-out;
+}
+
+#dh-modal-alert.active {
+	opacity: 1;
+	visibility: visible;
+}
+
+.dh-modal {
+	padding: 20px;
+	width: 90%;
+	border-radius: 15px;
+	background-color: #F4F4F4;
+	height: 90px;
+	display: flex;
+	align-items: center;
+	margin: 18px auto;
+	z-index: 1500;
+}
+
+.dh-modal-title {
+	font-size: 18px;
+	font-weight: 700;
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 7px;
+	align-items: center;
+}
+
+.dh-modal-content {
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	flex-direction: column;
+}
+
+.dh-alert-img {
+	width: 25px;
+	height: 25px;
+	margin-right: 10px;
+}
+
+.dh-modal-text {
+	color: #313131;
+	font-size: 15px;
+	font-weight: 600;
+}
+
+.dh-modal-blank {
+	height: 9vh;
+}

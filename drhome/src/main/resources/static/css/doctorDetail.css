@@ -1,0 +1,609 @@
+@charset "UTF-8";
+
+@import
+	url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css")
+	;
+
+@import
+	url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css')
+	;
+
+/* 기본 틀 */
+* {
+	font-family: "Pretendard Variable";
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: white;
+}
+
+header {
+	position: fixed;
+	height: 8vh;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	align-items: center;
+	z-index: 1000;
+	background-color: white;
+	padding-inline-end: 22px;
+	padding-inline-start: 24px;
+}
+
+.xi-angle-left, .xi-angle-right {
+	color: #757575;
+}
+
+.headerTitle {
+	font-family: "NanumSquare" !important;
+	font-size: 18px;
+	text-align: center;
+	font-weight: 900;
+	margin: 20px 50px;
+}
+
+footer {
+	bottom: 0;
+	position: fixed;
+	height: 9vh;
+	display: flex;
+	justify-content: space-evenly;
+	width: 100%;
+	align-items: center;
+	z-index: 1000;
+	background-color: white;
+}
+
+main {
+	padding-top: 9vh;
+}
+
+.blank {
+	width: 21px;
+}
+
+.graySeperate {
+	height: 15px;
+	background-color: #F5F5F5;
+}
+
+.margin-right {
+	margin-right: 4px;
+}
+
+.margin-left {
+	margin-left: 4px;
+}
+
+/* main */
+.doctorHeader {
+	width: 90%;
+	margin: 0 auto;
+	display: flex;
+	flex-wrap: nowrap;
+	height: 110px;
+	align-items: center;
+	margin-bottom: 15px;
+}
+
+.grayLine {
+	width: 100%;
+	height: 2px;
+	background-color: #F5F5F5;
+	margin: 7px 0;
+}
+
+.doctorImg {
+	width: 90px;
+	height: 90px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50px;
+	border: 0.5px solid #F5F5F5;
+	overflow: hidden;
+}
+
+.doctorImg img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.doctorInfo {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 60%;
+	padding: 0 10px;
+	height: 90px;
+	justify-content: space-between;
+}
+
+.doctorInfoHeader {
+	display: flex;
+	align-items: flex-end;
+}
+
+.doctorName {
+	font-size: 20px;
+	font-weight: 700;
+	margin-right: 10px;
+}
+
+.doctorStatus {
+	font-size: 11px;
+}
+
+.doctorInfoBody {
+	display: flex;
+	font-size: 14px;
+	color: #5c5c5c;
+}
+
+.dotorSpecialist, .dotorTelehealth {
+	display: flex;
+	align-items: center;
+	margin-right: 10px;
+}
+
+.availableCircle {
+	color: #0091FF;
+}
+
+.unavailableCircle {
+	color: #9E9E9E;
+}
+
+.doctorInfoFooter {
+	width: 90%;
+	display: flex;
+	font-size: 13px;
+	align-items: flex-end;
+}
+
+.reviewScore {
+	margin: 0 4px;
+}
+
+.reviewCount {
+	color: #5c5c5c;
+	font-size: 12px;
+}
+
+.dotorSpecialist {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	font-size: 13px;
+	color: #5c5c5c;
+}
+
+/* 의사 상세정보 */
+.doctorBar {
+	width: 100%;
+	height: 7vh;
+	background-color: white;
+	z-index: 999;
+	display: flex;
+}
+
+.doctorBarIntroduce {
+	height: 7vh;
+	text-align: center;
+	display: flex;
+	font-size: 15px;
+	font-weight: 600;
+	color: #BFBFBF;
+	border-bottom: 2px solid #E0E0E0;
+	justify-content: center;
+	align-items: center;
+	width: 50%;
+}
+
+.doctorInfoBox {
+	padding: 23px 0 35px 0;
+}
+
+.doctorTitle {
+	font-size: 19px;
+	font-weight: 700;
+	width: 90%;
+	margin: 0 auto;
+	margin-bottom: 22px;
+}
+
+.doctorIntroduce {
+	width: 90%;
+	margin: 0 auto;
+	font-size: 13px;
+	background-color: #F5F5F5;
+	border-radius: 20px;
+	padding: 20px;
+}
+
+.doctorIntroduce h3 {
+	margin-bottom: 10px;
+}
+
+.doctorCareer {
+	width: 90%;
+	margin: 0 auto;
+	font-size: 15px;
+}
+
+.doctorHospital {
+	display: flex;
+	align-items: center;
+	margin: 0 auto;
+	width: 90%;
+	height: 50px;
+	justify-content: space-between;
+}
+
+.hospitalImg {
+	width: 63px;
+	border-radius: 7px;
+	overflow: hidden;
+	height: 50px;
+}
+
+.hospitalBox {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	height: 100%;
+	width: 70%;
+}
+
+.hospitalName {
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.hospitalAddr {
+	font-size: 14px;
+	color: #5c5c5c;
+}
+
+/* footer */
+.submit {
+	width: 90%;
+	height: 70%;
+	border-radius: 7px;
+	color: #787878;
+	background-color: #ebebeb;
+	border: none;
+	font-size: 15px;
+	font-weight: 500;
+}
+
+.submit button {
+	font-size: 15px;
+	font-weight: 500;
+	color: #787878;
+	background-color: #ebebeb;
+	border: none;
+}
+
+.submit-btn-css {
+	background-color: #00C9FF;
+	color: white;
+}
+
+/* 리뷰 */
+#countReview {
+	font-size: 13px;
+	font-weight: 600;
+	color: #00c9ff;
+	margin-left: 4px;
+}
+
+.reviewHeader {
+	display: flex;
+	width: 90%;
+	margin: 0 auto 25px auto;
+	justify-content: space-between;
+}
+
+.doctorReviewScoreBoxLeft {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 30%;
+	margin-left: 5px;
+}
+
+.doctorReviewScore {
+	font-size: 32px;
+	font-weight: 800;
+	padding-bottom: 9px;
+}
+
+.doctorReviewStar {
+	color: #FFB300;
+	font-size: 14px;
+	padding: 4px 0;
+}
+
+.doctorReviewScoreBoxRight {
+	width: 60%;
+	padding-left: 10px;
+}
+
+.bar-container {
+	width: 60%;
+	padding-left: 10px;
+}
+
+.count-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 10px;
+	font-weight: 700;
+}
+
+.count-star {
+	width: 66%;
+	background-color: #dadada;
+	margin: 5px;
+	border-radius: 12px;
+}
+
+.bar {
+	border-radius: 12px;
+	height: 10px;
+	background-color: #00c9ff;
+}
+
+.reviewWritePage {
+	width: 90%;
+	font-size: 12px;
+	font-weight: 500;
+	color: #00c9ff;
+	margin: 0 auto 34px auto;
+	height: 29px;
+	display: flex;
+	border: 1px solid #00c9ff;
+	align-items: center;
+	justify-content: center;
+	border-radius: 15px;
+	background-color: white;
+}
+
+.sortReview {
+	margin: 13px 20px;
+}
+
+.sortReview button {
+	margin: 3px;
+	font-size: 11px;
+	font-weight: 500;
+	border: none;
+	background-color: white;
+	color: #BDBDBD;
+	border: none;
+}
+
+.reviewWriteBox {
+	width: 90%;
+	margin: 9px auto;
+}
+
+.reviewStar {
+	color: #FFB300;
+	font-size: 14px;
+	padding: 4px 0;
+	float: left;
+}
+
+.editReviewBox {
+	display: flex;
+	padding: 4px 0;
+	justify-content: flex-end;
+}
+
+.edit, .delete {
+	margin: 0 4px;
+}
+
+.rateInt {
+	color: black;
+	margin-left: 3px;
+	font-weight: 600;
+}
+
+.reviewKeyword {
+	display: flex;
+	clear: both;
+}
+
+.keyword {
+	font-size: 10px;
+	margin: 3px 8px 0 0;
+	padding: 4px 5px;
+	border-radius: 14px;
+	background-color: #F5F5F5;
+	text-align: center;
+	border: none;
+	font-weight: 500;
+}
+
+.reviewContent {
+	font-size: 17px;
+	padding: 8px 0;
+}
+
+.selectedSort {
+	color: #00c9ff !important;
+	font-weight: 600 !important;
+}
+
+.reviewFooter {
+	display: flex;
+	justify-content: space-between;
+	font-size: 12px;
+	font-weight: 500;
+	width: 100%;
+	align-items: center;
+}
+
+.writerBox {
+	display: flex;
+	align-items: center;
+}
+
+.reviewLike {
+	margin-left: auto;
+	padding: 5px;
+	border-radius: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.reviewLike button {
+	font-size: 10px;
+	background-color: white;
+	border: none;
+	font-weight: 500;
+}
+
+.recommend {
+	display: flex;
+	align-items: center;
+}
+
+.reviewGrayLine {
+	width: 100%;
+	height: 1px;
+	background-color: #F5F5F5;
+}
+
+/* 서브 메뉴 고정 */
+.fixed {
+	position: fixed;
+	height: 7vh;
+	width: 100%;
+	box-sizing: border-box;
+	top: 7vh;
+	background-color: white;
+}
+
+.selectOption {
+	color: black !important;
+	font-weight: 700 !important;
+	border-bottom: 2px solid black !important;
+}
+
+/* 확인 알림창 */
+.dh-modal-delete, .dh-modal-edit {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 3000;
+}
+
+/* 알림 모달 */
+#dh-modal-alert {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 1s ease-in-out;
+	background: rgba(0, 0, 0, 0.2);
+	justify-content: flex-end;
+	flex-direction: column;
+	z-index: 1499;
+	transition: opacity 1s ease-in-out;
+}
+
+#dh-modal-alert.active {
+	opacity: 1;
+	visibility: visible;
+}
+
+.dh-modal {
+	padding: 20px;
+	width: 90%;
+	border-radius: 15px;
+	background-color: #F4F4F4;
+	height: 90px;
+	display: flex;
+	align-items: center;
+	margin: 18px auto;
+	z-index: 1500;
+}
+
+.dh-modal-title {
+	font-size: 18px;
+	font-weight: 700;
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 7px;
+	align-items: center;
+}
+
+.dh-modal-content {
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	flex-direction: column;
+}
+
+.dh-alert-img {
+	width: 25px;
+	height: 25px;
+	margin-right: 10px;
+}
+
+.dh-modal-text {
+	color: #313131;
+	font-size: 15px;
+	font-weight: 600;
+}
+
+.dh-modal-blank {
+	height: 9vh;
+}
+
+/* 리뷰 수정 */
+.reviewEditWrite {
+	font-size: 15px;
+	padding: 4px 7px;
+	border: 0.5px solid #bbb8b8;
+	border-radius: 7px;
+	width: 80%;
+}
+
+.editButton {
+	border: none;
+	background-color: #00C9FF;
+	color: white;
+	border-radius: 3px;
+	padding: 5px 8px;
+}
+
+.reviewEdit {
+	display: block;
+	display: flex;
+	justify-content: space-between;
+	margin: 10px 0;
+	display: none;
+}

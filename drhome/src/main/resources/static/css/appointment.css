@@ -1,0 +1,254 @@
+@charset "UTF-8";
+
+@import
+	url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css")
+	;
+
+@import
+	url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css')
+	;
+
+* {
+	font-family: "Pretendard Variable";
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: white;
+}
+
+header {
+	position: fixed;
+	height: 8vh;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	align-items: center;
+	z-index: 1000;
+	background-color: white;
+	padding-inline-end: 22px;
+	padding-inline-start: 24px;
+}
+
+.headerTitle {
+	font-family: "NanumSquare" !important;
+	font-size: 18px;
+	text-align: center;
+	font-weight: 900;
+	margin: 20px 50px;
+}
+
+footer {
+	bottom: 0;
+	position: fixed;
+	height: 9vh;
+	display: flex;
+	justify-content: space-evenly;
+	width: 100%;
+	align-items: center;
+	z-index: 1000;
+	background-color: white;
+}
+
+main {
+	padding-top: 9vh;
+}
+
+.section {
+	padding: 23px 0 23px 0 !important;
+	width: 90%;
+	margin: 0 auto;
+}
+
+.graySeperate {
+	height: 15px;
+	background-color: #F5F5F5;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+}
+
+#blank {
+	width: 21px;
+}
+
+.appointmentTitleWrapper {
+	display: flex;
+	justify-content: space-between;
+}
+
+.appointmentTitle {
+	display: flex;
+	font-size: 15px;
+	font-weight: 700;
+	align-items: center;
+}
+
+.appointmentTitle img {
+	width: 25px;
+	height: 25px;
+	margin-right: 15px;
+	color: #8ed6ff;
+}
+
+.appointmentTitle span {
+	color: #d6d6d6;
+	font-size: 13px;
+	margin-left: 6px;
+}
+
+.appointmentTitle .status {
+	margin-right: 15px;
+	color: #8ed6ff;
+}
+
+.profile {
+	font-size: 16px;
+	font-weight: 600;
+	display: flex;
+	align-items: center;
+}
+
+.profile img {
+	width: 33px;
+	height: auto;
+	margin-right: 20px;
+}
+
+#normalKind {
+	display: flex;
+	width: 90%;
+	margin: 0 auto;
+	font-size: 14px;
+	font-weight: 500;
+	padding: 15px 24px;
+	border-radius: 10px;
+	justify-content: space-between;
+	background-color: #8ed6ff;
+	color: white;
+}
+
+.chooseDoctor {
+	display: flex;
+}
+
+.selectDoctorInfo {
+	text-align: center;
+	font-size: 13px;
+	font-weight: 500;
+	padding: 10px;
+	margin-right: 5px;
+}
+
+.selectDoctorInfo img {
+	width: 43px;
+	height: auto;
+	border-radius: 50px;
+}
+
+.selectedDoc {
+	background-color: #8ed6ff;
+	border-radius: 10px;
+	color: white;
+}
+
+.chooseDateWrapper {
+	display: flex;
+	overflow-x: scroll;
+}
+
+.chooseDate {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-right: 12px;
+}
+
+.chooseDate span {
+	color: gray;
+	font-size: 13px;
+}
+
+.circle {
+	height: 39px;
+	width: 39px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 17px;
+	font-weight: 500;
+	margin-top: 5px;
+}
+
+.selectedDate {
+	background-color: #8ed6ff;
+	color: white;
+}
+
+.content {
+	margin: 15px 0 0 0;
+	display: none;
+}
+
+.morning, .afternoon {
+	font-size: 15px;
+	font-weight: 500;
+	margin-bottom: 8px;
+}
+
+.afternoon {
+	margin-top: 10px;
+}
+
+.timeContainer button {
+	width: 23%;
+	font-size: 12px;
+	font-weight: 500;
+	padding: 12px 0px;
+	border-radius: 10px;
+	background-color: white;
+	margin: 0 3px 7px 0;
+	border: 1px solid #d6d6d6;
+}
+
+.timeUnavailable {
+	color: #787878;
+	background-color: #ebebeb !important;
+}
+
+.selectedTime {
+	background-color: #8ed6ff !important;
+	color: white;
+	border: none;
+}
+
+#noteText {
+	width: 100%;
+	height: 120px;
+	border: 1px solid #d6d6d6;
+	margin-top: 12px;
+	border-radius: 5px;
+	padding: 10px;
+	margin-top: 12px;
+}
+
+.finish {
+	width: 90%;
+	height: 70%;
+	border-radius: 7px;
+	color: #787878;
+	background-color: #ebebeb;
+	border: none;
+	font-size: 15px;
+	font-weight: 500;
+}
+
+.selectedFinish {
+	background-color: #8ed6ff;
+	color: white;
+}

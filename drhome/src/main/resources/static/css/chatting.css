@@ -1,0 +1,226 @@
+@charset "UTF-8";
+
+@import
+	url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css")
+	;
+
+@import
+	url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css')
+	;
+
+* {
+	font-family: "Pretendard Variable";
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: white;
+}
+
+header {
+	position: fixed;
+	height: 8vh;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	align-items: center;
+	z-index: 1000;
+	background-color: rgba(255, 255, 255, 0.3);
+	padding-inline-end: 22px;
+	padding-inline-start: 24px;
+}
+
+.headerTitle {
+	font-family: "NanumSquare" !important;
+	font-size: 18px;
+	text-align: center;
+	font-weight: 900;
+	margin: 20px 50px;
+}
+
+footer {
+	bottom: 0;
+	position: fixed;
+	height: 9vh;
+	width: 100%;
+	z-index: 1000;
+	background-color: white;
+}
+
+#modalHeader {
+	position: fixed;
+	height: 4vh;
+	display: flex;
+	justify-content: space-between;
+	width: 70%;
+	z-index: 1000;
+	background-color: white;
+}
+
+main {
+	padding-top: 9vh;
+}
+
+#blank {
+	width: 21px;
+}
+
+.xi-angle-left {
+	color: #757575;
+}
+
+.modal-wrapper {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1001;
+}
+
+.modal {
+	background: #fff;
+	padding: 20px;
+	border-radius: 10px;
+	width: 80%;
+	height: 70%;
+	font-size: 17px;
+	font-weight: 600;
+}
+
+#doctorWrapper {
+	overflow: scroll;
+	height: 100%;
+}
+
+.selectDoctor {
+	padding: 10px;
+	border-radius: 7px;
+	border: 1px solid #d9d9d9;
+	margin: 10px 0;
+	display: flex;
+	align-items: center;
+}
+
+.selectDoctor img {
+	width: 40px;
+	height : 40px;
+	margin-right: 21px;
+	border-radius: 50px;
+}
+
+.dpKind {
+	font-size: 12px;
+}
+
+.doctorName {
+	font-size: 15px;
+	font-weight: 500;
+}
+
+#talk {
+	position: relative;
+	height: 82vh;
+	overflow-y: scroll;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+}
+
+#close {
+	display: flex;
+	justify-content: flex-end;
+}
+
+#sendZone>* {
+	vertical-align: top;
+}
+
+#sendZone {
+	display: flex;
+	height: 8vh;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-content: center;
+	background-color: white;
+}
+
+#msg {
+	padding: 5px;
+	width: 85%;
+	height: 5vh;
+	border-radius: 20px;
+	border: none;
+	background-color: #F5F5F5;
+	font-size: 15px;
+}
+
+#btnSend {
+	color: #1976D2;
+	height: 5vh;
+	border-radius: 20px;
+	display: flex;
+	align-content: center;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+#content {
+	max-width: 100%;
+	white-space: normal;
+	font-size: 14px;
+}
+
+.me {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.other {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: flex-end;
+}
+
+.message {
+	padding: 7px;
+	border-radius: 7px;
+	max-width: 65%;
+	margin: 12px 6px 0 6px;
+	font-size: 13px;
+}
+
+.me .message {
+	background-color: #00C9FF;
+	color: white;
+	word-wrap: break-word; /* 줄바꿈 속성 추가 */
+	margin-right: 22px;
+}
+
+.other .message {
+	background-color: #EEEEEE;
+	word-wrap: break-word; /* 줄바꿈 속성 추가 */
+	margin-left: 22px;
+}
+
+.date {
+	margin-top: 10px;
+	font-size: 8px;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+}
+
+textarea:focus {
+	outline: none;
+	border: none;
+}

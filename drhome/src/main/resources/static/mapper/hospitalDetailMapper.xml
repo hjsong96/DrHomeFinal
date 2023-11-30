@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drhome.hospitaldetail.HospitalDetailDAO">
+	<select id="findHospitalByHno" resultType="Map">
+		SELECT h.hname,
+		h.haddr, v.hospitalDepartments, v.symptomKeywords,
+		h.hno, h.htelnumber, h.himg,
+		h.hinfo,hnightday,
+		TIME_FORMAT(hopentime, '%H:%i') as hopentime,
+		TIME_FORMAT(hclosetime, '%H:%i') as hclosetime,
+		TIME_FORMAT(hnightendtime, '%H:%i') as hnightendtime,
+		TIME_FORMAT(hbreaktime, '%H:%i') as hbreaktime,
+		TIME_FORMAT(hbreakendtime, '%H:%i') as hbreakendtime,
+		TIME_FORMAT(hholidayendtime, '%H:%i') as hholidayendtime,
+		hholiday,hparking FROM hospital h join hospitalinfo_view v on
+		h.hno=v.hno where h.hno =#{hno}
+	</select>
+
+	<select id="findDoctorByHno" resultType="Map">
+		SELECT dno,dname, dimg, dspecialist, dgender,
+		dpkind, dpkeyword
+		FROM doctor d
+		JOIN department dp ON d.dpno = dp.dpno
+		WHERE hno =#{hno}
+	</select>
+
+	<select id="findReviewByHno">
+		SELECT m.mname,
+		DATE_FORMAT(r.rdate, '%Y-%m-%d %H:%i') AS rdate ,
+		r.rrate, r.rcontent, r.rkeyword,
+		r.rlike,rno, d.dname FROM review r
+		JOIN doctor d on r.dno = d.dno 
+		JOIN member m on r.mno=m.mno 
+		WHERE r.hno =#{hno}
+	</select>
+
+
+	<select id="countReviewByRate" resultType="Map">
+		SELECT COUNT(CASE
+		WHEN
+		rrate = '5' THEN 1 END) AS veryGood,
+		COUNT(CASE WHEN rrate = '4' THEN 1
+		END) AS good,
+		COUNT(CASE WHEN rrate = '3' THEN 1 END) AS normal,
+		COUNT(CASE WHEN rrate = '2'
+		THEN 1 END) AS bad,
+		COUNT(CASE WHEN rrate =
+		'1' THEN 1 END) AS veryBad
+		FROM review WHERE
+		hno =#{hno};
+	</select>
+
+	<select id="sortReviewByNew" resultType="Map">
+		SELECT m.mname,
+		DATE_FORMAT(r.rdate, '%Y-%m-%d %H:%i') AS rdate, r.rrate,
+		r.rcontent, r.rkeyword, r.rlike, rno, d.dname FROM review r
+		JOIN
+		doctor
+		d ON r.dno = d.dno JOIN member m ON r.mno = m.mno WHERE
+		r.hno =
+		#{hno}
+		ORDER BY r.rdate DESC;
+	</select>
+
+	<select id="sortReviewByOld" resultType="Map">
+		SELECT m.mname,
+		DATE_FORMAT(r.rdate, '%Y-%m-%d %H:%i') AS rdate, r.rrate,
+		r.rcontent, r.rkeyword, r.rlike,rno, d.dname FROM review r JOIN
+		doctor
+		d ON r.dno = d.dno JOIN member m ON r.mno = m.mno WHERE r.hno =
+		#{hno}
+		ORDER BY r.rdate;
+	</select>
+
+	<select id="sortReviewByHighRate" resultType="Map">
+		SELECT m.mname,
+		DATE_FORMAT(r.rdate, '%Y-%m-%d %H:%i') AS rdate, r.rrate,
+		r.rcontent, r.rkeyword, r.rlike,rno, d.dname FROM review r JOIN
+		doctor
+		d ON r.dno = d.dno JOIN member m ON r.mno = m.mno WHERE r.hno =
+		#{hno}
+		ORDER BY r.rrate DESC;
+	</select>
+
+	<select id="sortReviewByLowRate" resultType="Map">
+		SELECT m.mname,
+		DATE_FORMAT(r.rdate, '%Y-%m-%d %H:%i') AS rdate, r.rrate,
+		r.rcontent, r.rkeyword, r.rlike,rno, d.dname FROM review r JOIN
+		doctor
+		d ON r.dno = d.dno JOIN member m ON r.mno = m.mno WHERE r.hno =
+		#{hno}
+		ORDER BY r.rrate;
+	</select>
+
+	<update id="hospitalUnlike">
+		UPDATE member SET mhospitallike =
+		CASE
+		WHEN
+		mhospitallike LIKE CONCAT('%',',', #{hname}, '%') THEN
+		REPLACE(mhospitallike, CONCAT(',', #{hname}),'')
+		WHEN mhospitallike
+		LIKE CONCAT('%',#{hname},',','%') THEN
+		REPLACE(mhospitallike,CONCAT(#{hname},','), '')
+		ELSE
+		REPLACE(mhospitallike,#{hname}, '')
+		END WHERE mno =#{mno};
+	</update>
+
+	<update id="hospitalLike">
+		UPDATE member SET mhospitallike = CASE WHEN
+		mhospitallike IS NULL OR
+		mhospitallike = '' THEN #{hname} ELSE
+		CONCAT(mhospitallike, ',',
+		#{hname}) END WHERE mno =#{mno};
+	</update>
+
+	<update id="countUpReviewLike"> UPDATE `review` SET `rlike`=`rlike`+1 WHERE
+		`rno`=#{reviewer};
+	</update>
+</mapper>

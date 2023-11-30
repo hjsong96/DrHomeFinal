@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drhome.map.MapDAO">
+
+	<select id="hospitalList" resultType="Map">
+		SELECT hno, hname, haddr, SUBSTRING_INDEX(himg, ',', 1) AS himg,
+TIME_FORMAT(hopentime, '%H:%i') AS hopentime, 
+    TIME_FORMAT(hclosetime, '%H:%i') AS hclosetime,
+  CASE
+        WHEN hnightday = '월요일' THEN 1
+        WHEN hnightday = '화요일' THEN 2
+        WHEN hnightday = '수요일' THEN 3
+        WHEN hnightday = '목요일' THEN 4
+        WHEN hnightday = '금요일' THEN 5
+        WHEN hnightday = '토요일' THEN 6
+        WHEN hnightday = '일요일' THEN 0
+    END AS hnightday,
+TIME_FORMAT(hnightendtime, '%H:%i') AS hnightendtime,
+TIME_FORMAT(hbreaktime, '%H:%i') AS hbreaktime,
+TIME_FORMAT(hbreakendtime, '%H:%i') AS hbreakendtime, hholiday, 
+TIME_FORMAT(hholidayendtime, '%H:%i') AS hholidayendtime
+		FROM hospital
+	</select>
+
+	<select id="pharmacyList" resultType="Map">
+		SELECT pno, pname, paddr, 
+		TIME_FORMAT(popentime, '%H:%i') AS popentime, 
+		TIME_FORMAT(pclosetime, '%H:%i') AS pclosetime
+		FROM pharmacy
+	</select>
+
+
+</mapper>

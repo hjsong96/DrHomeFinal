@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drhome.telehealth.TelehealthDAO">
+
+	<select id="departmentKeyword" resultType="Map">
+		SELECT dpno, dpkind, dpsymptom, dpkeyword, dpexample
+		FROM department
+	</select>
+	
+	<select id="doctorList" resultType="Map">
+		SELECT h.*
+		FROM hospitalList_view h
+		WHERE h.dtelehealth = 1
+	</select>
+	
+	<select id="kindDoctorList" parameterType="Map" resultType="Map">
+		SELECT h.*
+		FROM hospitalList_view h
+		WHERE #{kindKeyword} = h.dpkind
+		AND h.dtelehealth = 1
+	</select>
+	
+	<select id="symptomDoctorList" parameterType="Map" resultType="Map">
+		SELECT h.*
+		FROM hospitalList_view h
+		WHERE FIND_IN_SET(#{symptomKeyword}, h.dpkeyword)
+		AND h.dtelehealth = 1
+	</select>
+	
+	<select id="doctorNamelList" parameterType="Object" resultType="Map">
+		SELECT h.*
+		FROM hospitalList_view h
+		WHERE h.dname LIKE CONCAT('%', #{keyword}, '%')
+		AND h.dtelehealth = 1
+	</select>
+	
+	<select id="doctor" parameterType="Integer" resultType="Map">
+		SELECT h.*, COALESCE(COUNT(t.dno), 0) as count
+		FROM hospitalList_view h
+		LEFT JOIN telehealth t ON h.dno = t.dno
+		WHERE h.dno = #{dno}
+	</select>
+	
+	<select id="doctorReview" parameterType="Integer" resultType="Map">
+		SELECT r.rno, r.mno, DATE_FORMAT(r.rdate, '%Y-%m-%d %H:%i') AS rdate, r.rrate, r.rcontent, r.rkeyword, r.rlike, r.dno, r.hno, m.mname
+		FROM review r
+		JOIN member m ON m.mno = r.mno
+		WHERE r.dno = #{dno}
+		ORDER BY rdate DESC
+	</select>
+	
+	<insert id="doctorReviewWrite" parameterType="Object">
+		INSERT INTO review (mno,rrate,rcontent,rkeyword,dno,hno)
+		VALUES (#{mno},#{rrate},#{rcontent},#{rkeyword},#{dno}, (SELECT hno FROM hospitalList_view WHERE dno=#{dno}))
+	</insert>
+	
+	<update id="reviewLike" parameterType="Integer">
+		UPDATE review r
+		SET r.rlike = r.rlike + 1
+		WHERE r.rno = #{rno}
+	</update>
+	
+	<select id="rlikeUpdate" parameterType="Integer" resultType="Integer">
+		SELECT r.rlike
+		FROM review r
+		WHERE r.rno = #{rno}
+	</select>
+	
+	<delete id="reviewDelete" parameterType="Integer">
+		DELETE FROM review r
+		WHERE r.rno = #{rno}
+	</delete>
+	
+	<update id="reviewEdit" parameterType="Map">
+		UPDATE review r
+		SET r.rcontent = #{rcontent}
+		WHERE r.rno = #{rno}
+	</update>
+	
+	<select id="telehealthApply" parameterType="Integer" resultType="Map">
+		SELECT h.hno, h.dno, h.dspecialist, h.dpno, h.dpkind, h.dpkeyword
+		FROM hospitalList_view h
+		WHERE h.dno = #{dno}
+	</select>
+	
+	<insert id="apply">
+		INSERT INTO telehealth (tdate, tsymptomdetail, tprice, hno, dno, dpno, mno)
+		VALUES (#{date}, #{tsymptomdetail}, #{pay}, #{hno}, #{dno}, #{dpno}, #{mno})
+		<selectKey keyProperty="tno" resultType="int" order="AFTER">
+	        SELECT LAST_INSERT_ID() AS tno
+	    </selectKey>
+	</insert>
+	
+	<select id="countReviewByRate" resultType="Map">
+		SELECT COUNT(CASE
+		WHEN
+		rrate = '5' THEN 1 END) AS veryGood,
+		COUNT(CASE WHEN rrate = '4' THEN 1
+		END) AS good,
+		COUNT(CASE WHEN rrate = '3' THEN 1 END) AS normal,
+		COUNT(CASE WHEN rrate = '2'
+		THEN 1 END) AS bad,
+		COUNT(CASE WHEN rrate =
+		'1' THEN 1 END) AS veryBad
+		FROM review WHERE
+		dno =#{dno}
+	</select>
+	
+</mapper>

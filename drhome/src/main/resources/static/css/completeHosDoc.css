@@ -1,0 +1,119 @@
+@charset "UTF-8";
+
+@import
+	url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css")
+	;
+
+@import
+	url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css')
+	;
+
+* {
+	font-family: "Pretendard Variable";
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: white;
+}
+
+header {
+	position: fixed;
+	height: 8vh;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	align-items: center;
+	z-index: 1000;
+	background-color: white;
+	padding-inline-end: 22px;
+	padding-inline-start: 24px;
+}
+
+
+.top-title{
+	font-size: 20px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+main{
+	padding-top: 9vh;
+}
+
+.top-introduce{
+	margin: 5px 0px;
+}
+
+.img-area{
+    text-align: center;
+    margin: 50px 0px 0px 0px;
+}
+
+.img{
+	width: 136px;
+}
+
+.top-title{
+	margin: 10px;
+}
+
+.comment-area{
+	margin: 36px 0px 0px 0px;
+    text-align: center;
+}
+
+.introduce-area{
+	margin: 36px 0px 0px 0px;
+}
+
+.complete-area {
+	 padding-top: 11vh;
+}
+
+footer {
+    bottom: 0;
+    position: fixed;
+    height: 9vh;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    align-items: center;
+    z-index: 1000;
+    background-color: white;
+}
+
+footer button {
+	display: flex;
+	font-weight: 700;
+	background-color: #00c9ff;
+	color: white;
+	height: 80%;
+	width: 40%;
+	border: none;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+	font-size: 15px;
+	border-radius: 14px;
+}
+
+.img-area {
+	width: 146px;
+    height: 146px;
+    background-color: #beecff;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0px 15px #9be2ff;
+}
+
+.img {
+	width: 120px;
+    background-color: white;
+    border-radius: 50%;
+}

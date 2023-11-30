@@ -1,0 +1,156 @@
+@charset "UTF-8";
+
+@import
+	url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css")
+	;
+
+@import
+	url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css')
+	;
+
+* {
+	font-family: "Pretendard Variable";
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: white;
+}
+
+header {
+	position: fixed;
+	height: 8vh;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	align-items: center;
+	z-index: 1000;
+	background-color: white;
+	padding-inline-end: 22px;
+	padding-inline-start: 24px;
+}
+
+.xi-angle-left, .xi-angle-right {
+	color: #757575;
+}
+
+.headerTitle {
+	font-family: "NanumSquare" !important;
+	font-size: 18px;
+	text-align: center;
+	font-weight: 900;
+	margin: 20px 50px;
+}
+
+footer {
+	bottom: 0;
+	position: fixed;
+	height: 9vh;
+	width: 90%;
+	z-index: 1000;
+	background-color: white; 
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+footer button {
+	display: flex;
+	font-weight: 700;
+	background-color: #00c9ff;
+	color: white;
+	height: 80%;
+	width: 100%;
+	border: none;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+	font-size: 15px;
+	border-radius: 14px;
+	margin: 0px -20px;
+}
+
+main{
+	padding-top: 9vh;
+}
+
+.blank {
+	width: 21px;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+}
+
+.main-area {
+margin: 20px 20px;
+}
+
+
+.top-title{
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.input-area{
+    width: 100%;
+    height: 30%;
+    margin: 28px 0px;
+}
+
+.input-area p, .id-p {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.input-area input{
+    height: 50px;
+    width: 84%;
+    border-width: 0 0 0.1px;
+    color: #757575;
+    box-sizing: border-box;
+}
+
+.id-p {
+    line-height: 25px;
+}
+
+.info {
+	margin: 7px 0px;
+}
+
+
+#changeHealthRecordBtn {
+	font-weight: 700;
+	background-color: #00c9ff;
+	color: white;
+	width: 100%;
+	height: 61px;
+	border: none;
+	text-align: center;
+	font-size: 15px;
+	border-radius: 14px;
+	margin: 0px -20px;
+}
+
+#hrheight, #hrweight{
+	width: 90%;
+}
+
+#hrissue{
+	width: 100%;
+}
+
+#hrheight::placeholder,
+#hrweight::placeholder,
+#hrsystolicpressure::placeholder,
+#hrdiastolicpressure::placeholder,
+#hrissue::placeholder
+ {
+	color:#BDBDBD;
+    }
+

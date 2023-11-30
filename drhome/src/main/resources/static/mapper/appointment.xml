@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drhome.appointment.AppointmentDAO">
+	<select id="findHospitalDeatilByHno">
+		SELECT hno, hname, hopentime, hclosetime, hnightday,
+		haddr,
+		hnightendtime, hbreaktime, hbreakendtime, hholiday,
+		hholidayendtime
+		FROM hospital WHERE hno=#{hno}
+	</select>
+
+	<select id="checkTimeStatus">
+		SELECT TIME_FORMAT(atime, '%H:%i') as atime FROM
+		appointment
+		WHERE hno=#{hno} and adate=#{date}
+	</select>
+
+	<select id="findDoctorByHno" resultType="Map">
+		SELECT dno, dname,dimg
+		FROM doctor WHERE hno=#{hno}
+	</select>
+
+	<insert id="appointmentFinish">
+		INSERT INTO appointment (asymptomInfo, adate, aday,
+		atime, hno, dno,
+		mno, dpno)
+		VALUES (#{content}, #{date}, #{day},
+		#{time}, #{hno}, #{dno},
+		#{mno}, (SELECT dpno FROM doctor WHERE
+		hno=#{hno} AND dno=#{dno}))
+		<selectKey keyProperty="ano" resultType="int" order="AFTER">
+			SELECT
+			LAST_INSERT_ID() AS ano
+		</selectKey>
+	</insert>
+
+	<insert id="appointmentTodayFinish">
+		INSERT INTO appointment (adate, aday, atime, hno,
+		mno, dpno, dno)
+		VALUES (#{date}, #{day}, #{time}, #{hno},
+		#{mno},
+		(SELECT dpno FROM
+		department WHERE dpkind = #{dpkind}),
+		(SELECT dno
+		FROM doctor WHERE hno
+		=#{hno} AND dpno = (SELECT dpno FROM department
+		WHERE dpkind =
+		#{dpkind})))
+
+		<selectKey keyProperty="ano" resultType="int" order="AFTER">
+			SELECT
+			LAST_INSERT_ID() AS ano
+		</selectKey>
+
+	</insert>
+
+	<select id="findHospitalDepartmentsByHno">
+		SELECT hospitalDepartments FROM hospitalinfo_view
+		WHERE hno = #{hno}
+	</select>
+
+	<select id="findAppointmentDetailByAno">
+		SELECT adate, aday, TIME_FORMAT(atime, '%H:%i') as
+		atime,hname, dname, mname, dpkind
+		FROM appointment a
+		JOIN hospital h ON
+		a.hno = h.hno
+		JOIN member m ON a.mno = m.mno
+		JOIN doctor d ON a.dno =
+		d.dno
+		JOIN department dp ON a.dpno = dp.dpno
+		WHERE ano =#{ano}
+	</select>
+
+	<insert id="pushtoAlert">
+		INSERT INTO notification (nappointmentNoti, mno)
+		VALUES(1, #{mno})
+
+	</insert>
+</mapper>

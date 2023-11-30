@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drhome.qna.QnaBoardDAO">
+
+	<select id="qnaList" resultType="Map">
+		SELECT board.bno, board.btitle,
+		board.bcontent, department.dpkind AS dpkind, COUNT(comment.cno) AS comment_count
+		FROM board
+		LEFT JOIN comment ON board.bno = comment.bno
+		LEFT JOIN department ON board.dpno = department.dpno
+		WHERE board.btype = 0
+		GROUP BY board.bno, board.btitle, board.bcontent, department.dpkind
+		ORDER BY board.bno DESC;
+	</select>
+
+	<select id="qnaQuestion" parameterType="Integer"
+		resultType="Map">
+		SELECT board.bno, board.btitle, board.bcontent, department.dpkind AS dpkind,
+		board.bdate, board.bcalldibs, member.mno, member.mname
+
+		FROM board
+		LEFT JOIN member ON board.mno = member.mno
+		LEFT JOIN department ON board.dpno = department.dpno
+		WHERE board.bno = #{bno};
+	</select>
+
+
+	<select id="qnaAnswer" parameterType="Integer" resultType="Map">
+		SELECT comment.hno, comment.dno, comment.cno, comment.cdate,
+		comment.ccontent
+		FROM
+		comment
+		LEFT JOIN board ON comment.bno = board.bno
+		WHERE board.bno =
+		#{bno} AND comment.dno IS NOT NULL
+		GROUP BY
+		comment.hno, comment.dno,
+		comment.cdate, comment.ccontent
+		ORDER BY
+		comment.cno DESC;
+	</select>
+
+	<select id="doctorInfo" parameterType="Integer" resultType="Map">
+		SELECT dv.dno, dv.dname, dv.dimg, dv.dinfo, dv.dpkind, dv.dcareer,
+		dv.hno,
+		dv.reviewAverage, hv.hname, hv.hospitalDepartments
+		FROM
+		doctorinfo_view
+		dv
+		INNER JOIN hospitalinfo_view hv ON dv.hno = hv.hno
+		WHERE dv.dno IN
+		<foreach item="dno" collection="list" open="(" separator=","
+			close=")"> #{dno}
+		</foreach>
+	</select>
+
+	<insert id="postQna" parameterType="Map">
+		INSERT INTO board (btitle, bcontent, bdate, btype, mno, dpno)
+		VALUES (
+		#{btitle},
+		#{bcontent},
+		#{bdate},
+		#{btype},
+		#{mno},
+		(SELECT dpno FROM department WHERE dpkind = #{selectDepartment})
+		);
+	</insert>
+
+	<select id="commentCount" parameterType="Integer"
+		resultType="Integer">
+		SELECT COUNT(cno) FROM comment WHERE bno = #{bno}
+	</select>
+
+	<insert id="writeQnaAnswer" parameterType="Map">
+		INSERT INTO comment
+		(mno, bno, dno, hno, ccontent, cdate)
+		VALUES (
+		#{mno},
+		#{bno},
+		#{dno},
+		(SELECT hno FROM doctor WHERE dno = #{dno}),
+		#{ccontent},
+		#{cdate}
+		);
+	</insert>
+
+	<delete id="deleteQnaAnswer" parameterType="Map">
+		DELETE FROM comment
+		WHERE bno = #{bno} AND cno = #{cno}
+	</delete>
+
+	<update id="addQnaCallDibs" parameterType="Map">
+		UPDATE board
+		SET
+		bcalldibs = CASE
+		WHEN bcalldibs IS NULL THEN #{mno}
+		ELSE
+		CONCAT(bcalldibs, ',', #{mno})
+		END
+		WHERE bno=#{bno}
+	</update>
+
+	<update id="delQnaCallDibs" parameterType="Map">
+		UPDATE board
+		SET
+		bcalldibs =
+		CASE
+		WHEN CONCAT(',', bcalldibs, ',') LIKE CONCAT('%,',
+		#{mno}, ',%') THEN
+		TRIM(BOTH ',' FROM REPLACE(CONCAT(',', bcalldibs,
+		','), CONCAT(',',
+		#{mno}, ','), ','))
+		ELSE bcalldibs
+		END
+		WHERE bno =
+		#{bno}
+	</update>
+
+	<update id="deleteQnaQuestion" parameterType="Map">
+		UPDATE board
+		SET
+		btype = #{btype}
+		WHERE bno=#{bno}
+	</update>
+
+	<select id="reportCount" parameterType="Map"
+		resultType="Integer">
+		SELECT COUNT(rpno) FROM report WHERE bno = #{bno} AND
+		rpreporterno = #{mno}
+	</select>
+
+	<insert id="reportPost" parameterType="Map">
+		INSERT INTO report
+		(rpreporterno, bno, rpcontent, rpurl, rpdate, mno) VALUES
+		(#{mno},
+		#{bno}, #{rpcontent}, #{rpurl}, #{rpdate}, (SELECT mno FROM
+		board
+		WHERE bno = #{bno}))
+	</insert>
+
+	<select id="boardSearchAll" parameterType="String"
+		resultType="Map">
+		 SELECT b.*, department.dpkind AS dpkind, COUNT(comment.cno) AS comment_count
+    FROM board b
+    LEFT JOIN department ON b.dpno = department.dpno
+    LEFT JOIN comment ON b.bno = comment.bno
+    WHERE b.btitle LIKE CONCAT('%', '${searchWord}', '%')
+        OR b.bcontent LIKE CONCAT('%', '${searchWord}', '%')
+        OR comment.ccontent LIKE CONCAT('%', '${searchWord}', '%')
+    GROUP BY b.bno;
+	</select>
+
+	<select id="boardSearchTitle" parameterType="String"
+		resultType="Map">
+	  SELECT b.*, department.dpkind AS dpkind, COUNT(comment.cno) AS comment_count
+    FROM board b
+    LEFT JOIN department ON b.dpno = department.dpno
+    LEFT JOIN comment ON b.bno = comment.bno
+    WHERE b.btitle LIKE CONCAT('%', '${searchWord}', '%')
+    GROUP BY b.bno;
+	</select>
+
+	<select id="boardSearchContent" parameterType="String"
+		resultType="Map">
+		 SELECT b.*, department.dpkind AS dpkind, COUNT(comment.cno) AS comment_count
+    FROM board b
+    LEFT JOIN department ON b.dpno = department.dpno
+    LEFT JOIN comment ON b.bno = comment.bno
+    WHERE b.bcontent LIKE CONCAT('%', '${searchWord}', '%')
+        OR comment.ccontent LIKE CONCAT('%', '${searchWord}', '%')
+    GROUP BY b.bno;
+	</select>
+
+	<update id="editQna" parameterType="Map">
+		UPDATE board
+		SET
+		btitle =
+		#{btitle},
+		bcontent = #{bcontent},
+		dpno = (SELECT dpno FROM department
+		WHERE dpkind = #{selectDepartment})
+		WHERE bno=#{bno}
+	</update>
+	
+	<insert id="sendNotification">
+		INSERT INTO notification (mno, nqnaboardNoti )
+		VALUES((SELECT mno FROM board WHERE bno=#{bno}), #{bno})
+	</insert>
+
+</mapper>

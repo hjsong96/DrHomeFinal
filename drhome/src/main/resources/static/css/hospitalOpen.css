@@ -1,0 +1,282 @@
+@charset "UTF-8";
+
+@import
+	url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css")
+	;
+
+@import
+	url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css')
+	;
+
+* {
+	font-family: "Pretendard Variable";
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: white;
+}
+
+header {
+	position: fixed;
+	height: 8vh;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	align-items: center;
+	z-index: 1000;
+	background-color: rgba(255, 255, 255, 0.3);
+	padding-inline-end: 22px;
+	padding-inline-start: 24px;
+}
+
+.headerTitle {
+	font-family: "NanumSquare" !important;
+	font-size: 18px;
+	text-align: center;
+	font-weight: 900;
+	margin: 20px 50px;
+}
+
+footer {
+	bottom: 0;
+	position: fixed;
+	height: 9vh;
+	width: 100%;
+	z-index: 1000;
+	background-color: white;
+}
+
+main {
+	padding-top: 9vh;
+	background-color: white;
+}
+
+#blank {
+	width: 21px;
+}
+
+.xi-angle-left {
+	color: #757575;
+}
+
+.chkData {
+	margin: 8px auto;
+	width: 90%;
+	font-size: 14px;
+}
+
+.detailTitle {
+	font-size: 20px;
+	font-weight: 700;
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+.searchTab {
+	width: 90%;
+}
+
+.bold {
+	font-weight: 700;
+	font-size: 17px;
+}
+
+.locate {
+	margin-top: 7px;
+}
+
+.mini {
+	color: #a8a8a8;
+	float: right;
+}
+
+.grabSearch {
+	height: 35px;
+	background-color: #F5F5F5;
+	border-top: 1px solid #d5d2d2;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	color: #5c5c5c;
+}
+
+#searchHos {
+	background-color: #00C9FF;
+    color: white;
+    border-radius: 20px;
+    border: none;
+    width: 30px;
+    height: 27px;
+}
+
+#searchV {
+	width: 120px;
+}
+
+.searchN {
+	margin-left: 13px;
+}
+
+#searchDiv {
+	margin: 0 auto;
+}
+
+.oneData {
+	background-color: #e5e5e5;
+	height: 1px;
+}
+
+.Docs {
+	background-color: gray;
+	height: 1px;
+	margin-top: 20px;
+}
+
+.xi-close {
+	right: 5px;
+	position: fixed;
+	top: 4px;
+}
+
+.first {
+	margin-top: 30px;
+	font-size: 16px;
+}
+
+#rhno {
+	float: left;
+	font-weight: 700;
+	margin-top: -54px;
+	font-size: 20px;
+}
+
+#rhaddr, #rhopendate, #rhtelnumber, #rhparking {
+	font-weight: 500;
+	font-size: 16px;
+	color: #0f0f0f;
+	margin-left: 16px;
+}
+
+.tag {
+	color: #a8a8a8;
+	font-size: 16px;
+	margin-bottom: 3px;
+}
+
+.tag2 {
+	color: #a8a8a8;
+	font-size: 14px;
+}
+
+.dhBtn {
+	border: none;
+	background-color: #00c9ff;
+	color: white;
+	border: none;
+	border-radius: 7px;
+	line-height: 24px;
+	text-align: center;
+	height: 30px;
+	width: 100px;
+}
+
+.wrapper2 {
+	margin: 7px 0;
+	width: 150px;
+}
+
+#confirm {
+	float: left;
+	position: fixed;
+	left: 70px;
+	bottom: 190px;
+}
+
+#cancel {
+	float: right;
+	margin-left: 140px;
+	margin-top: 20px;
+}
+
+#goLogin {
+	background-color: #00c9ff;
+	color: white;
+	border: none;
+	border-radius: 7px;
+	line-height: 24px;
+	text-align: center;
+	height: 42px;
+	width: 100%;
+}
+
+.wrapper {
+	margin: 10px auto;
+	display: flex;
+}
+
+.wrapper3 {
+	margin: 7px 0;
+}
+
+.time {
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.container {
+	display: flex;
+	margin-bottom: 5px;
+}
+
+.tagTitle {
+	color: #a8a8a8;
+	font-size: 16px;
+	margin-bottom: 3px;
+	width: 70px;
+}
+
+#rhinfo {
+	width: 100%;
+	background-color: #e6e6e6;
+	display: block;
+	padding: 17px;
+	border-radius: 8px;
+	font-size: 13px;
+}
+
+.spaceBetween {
+	height: 10px;
+}
+
+.tagTitle1 {
+	color: #a8a8a8;
+    font-size: 16px;
+    margin-bottom: 3px;
+    width: 90px;
+}
+
+.xi-search {
+   color: #00C9FF;
+   background-color: white;
+   border: none;
+   box-shadow: none;
+}
+
+.searchForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px 0;
+    height: 30px;
+}
+
+#searchWordInput {
+    width: 250px;
+    align-items: center;
+    border: 1px solid #F5F5F5;
+    border-radius: 7px;
+    margin-right: 6px;
+}

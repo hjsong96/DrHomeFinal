@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drhome.chatting.ChattingDAO">
+	<select id="getDoctor">
+		SELECT m.mno, m.mname, dpkind, m.mgrade, d.dimg
+		FROM member m
+		JOIN doctor d on d.dno= m.dno join department dp on dp.dpno=d.dpno
+		WHERE mgrade = '5' OR mgrade = '6';
+	</select>
+	
+	<insert id="alertDoctor">
+		INSERT into notification (mno, nchattingNoti)
+		VALUES(#{roomNum}, #{manme})
+	</insert>
+
+</mapper>
